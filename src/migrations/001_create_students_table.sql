@@ -6,9 +6,9 @@ CREATE TABLE IF NOT EXISTS students (
     email VARCHAR(50),
     phone_number VARCHAR(15),
     birth_date DATE,
-    joined_at DATE DEFAULT CURRENT
+    joined_at DATE DEFAULT CURRENT_DATE
 );
 
 CREATE INDEX IF NOT EXISTS idx_student_email ON students(email);
 
-CREATE INDEX IF NOT EXISTS idx_student_joined_at ON student(joined_at DESC);
+CREATE INDEX IF NOT EXISTS idx_student_joined_at ON students(joined_at DESC);
