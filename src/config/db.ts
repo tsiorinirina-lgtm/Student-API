@@ -12,11 +12,10 @@ try {
     .query(
       "SELECT table_name FROM information_schema.tables WHERE table_schema NOT IN ('pg_catalog', 'information_schema')AND table_type ='BASE TABLE';",
     )
-    .then((res) =>
-      res.rows.forEach((row) =>
-        console.log("Tables in the database:", row.table_name),
-      ),
-    );
+    .then((res) => {
+      console.log("Tables in the database:");
+      res.rows.forEach((row) => console.log(row.table_name));
+    });
 } catch (error) {
   console.log("An error occurred:", error);
 }
