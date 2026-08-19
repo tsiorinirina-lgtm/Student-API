@@ -39,7 +39,7 @@ export const userController = {
         res.status(409).json({ error: "Email is already registered" });
         return;
       }
-      const passwordHash = await bcrypt.hash(password, 12);
+      const passwordHash = await bcrypt.hash(password, 10);
       const user = await userRepository.create({
         username,
         email,
