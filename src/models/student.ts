@@ -9,16 +9,7 @@ export interface Student {
   joined_at: Date;
 }
 
-export interface CreateStudentDTO {
-  first_name: string;
-  last_name: string;
-  student_year: number;
-  email: string;
-  phone_number: string;
-  birth_date: Date;
-}
-
-export interface UpdateStudentDTO {
+export interface StudentDTO {
   first_name: string;
   last_name: string;
   student_year: number;

@@ -1,8 +1,17 @@
 import type { Request, Response } from "express";
-import type { CreateStudentDTO, UpdateStudentDTO } from "../models/student.ts";
+import type { StudentDTO } from "../models/student.ts";
 import { studentRepository } from "../repositories/studentRepository.ts";
-import { log } from "node:console";
+import { validateStudent } from "../services/studentValidation.ts";
+import { studentStatsService } from "../services/studentStats.ts";
 export const studentController = {
+  getStats: async (req: Request, res: Response): Promise<void> => {
+    try {
+      res.json({ data: await studentStatsService.get() });
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+  },
   getAll: async (req: Request, res: Response): Promise<void> => {
     try {
       const students = await studentRepository.findAll();
@@ -29,26 +38,16 @@ export const studentController = {
     }
   },
   create: async (
-    req: Request<{}, {}, CreateStudentDTO>,
+    req: Request<{}, {}, StudentDTO>,
     res: Response,
   ): Promise<void> => {
     try {
-      const {
-        first_name,
-        last_name,
-        student_year,
-        email,
-        phone_number,
-        birth_date,
-      } = req.body;
-      const student = await studentRepository.create({
-        first_name,
-        last_name,
-        email,
-        student_year,
-        phone_number,
-        birth_date,
-      });
+      const validation = validateStudent(req.body);
+      if (!validation.valid) {
+        res.status(400).json({ errors: validation.errors });
+        return;
+      }
+      const student = await studentRepository.create(validation.data);
       res.status(201).json({ data: student });
     } catch (err) {
       console.log(err);
@@ -56,26 +55,47 @@ export const studentController = {
     }
   },
   update: async (
-    req: Request<{}, {}, UpdateStudentDTO>,
+    req: Request<{ id: string }, {}, StudentDTO>,
     res: Response,
   ): Promise<void> => {
     try {
-      const {
-        first_name,
-        last_name,
-        student_year,
-        email,
-        phone_number,
-        birth_date,
-      } = req.body;
-      const student = await studentRepository.update({
-        first_name,
-        last_name,
-        email,
-        student_year,
-        phone_number,
-        birth_date,
-      });
+      const studentId = Number(req.params.id);
+      if (!Number.isInteger(studentId) || studentId < 1) {
+        res
+          .status(400)
+          .json({ error: "Student id must be a positive integer" });
+        return;
+      }
+
+      let payload: unknown = req.body;
+      if (req.method === "PATCH") {
+        const currentStudent = await studentRepository.findById(studentId);
+        if (!currentStudent) {
+          res.status(404).json({
+            status: 404,
+            details: "Student not found check your inputs",
+          });
+          return;
+        }
+        payload = { ...currentStudent, ...req.body };
+      }
+
+      const validation = validateStudent(payload);
+      if (!validation.valid) {
+        res.status(400).json({ errors: validation.errors });
+        return;
+      }
+      const student = await studentRepository.update(
+        studentId,
+        validation.data,
+      );
+      if (!student) {
+        res.status(404).json({
+          status: 404,
+          details: "Student not found check your inputs",
+        });
+        return;
+      }
       res.status(200).json({ data: student });
     } catch (err) {
       console.log(err);
@@ -84,7 +104,7 @@ export const studentController = {
   },
   remove: async (req: Request, res: Response): Promise<void> => {
     try {
-      const student = await studentRepository.findById(Number(req.params.id));
+      const student = await studentRepository.delete(Number(req.params.id));
       if (!student) {
         res.status(404).json({
           status: 404,
@@ -92,7 +112,7 @@ export const studentController = {
         });
         return;
       }
-      res.status(204);
+      res.sendStatus(204);
     } catch (err) {
       console.log(err);
       res.sendStatus(500);
