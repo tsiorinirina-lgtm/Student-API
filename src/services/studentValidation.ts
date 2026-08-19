@@ -51,10 +51,25 @@ export const validateStudent = (input: unknown): ValidationResult => {
     errors.push("student_year must be an integer between 1 and 9");
   }
 
-  const birthDate =
-    typeof body.birth_date === "string" || body.birth_date instanceof Date
-      ? new Date(body.birth_date)
-      : new Date("invalid");
+  let birthDate = new Date("invalid");
+  if (body.birth_date instanceof Date) {
+    birthDate = new Date(body.birth_date);
+  } else if (typeof body.birth_date === "string") {
+    const dateParts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(body.birth_date);
+    if (dateParts) {
+      const year = Number(dateParts[1]);
+      const month = Number(dateParts[2]);
+      const day = Number(dateParts[3]);
+      birthDate = new Date(Date.UTC(year, month - 1, day));
+      if (
+        birthDate.getUTCFullYear() !== year ||
+        birthDate.getUTCMonth() !== month - 1 ||
+        birthDate.getUTCDate() !== day
+      ) {
+        birthDate = new Date("invalid");
+      }
+    }
+  }
   if (Number.isNaN(birthDate.getTime()))
     errors.push("birth_date must be a valid date");
 

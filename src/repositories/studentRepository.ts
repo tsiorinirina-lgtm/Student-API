@@ -12,19 +12,23 @@ export const studentRepository = {
       average_year: string | null;
       by_year: Array<{ student_year: number; count: number }>;
     }>(
-      `SELECT
-         COUNT(*)::int AS total,
-         ROUND(AVG(student_year), 2) AS average_year,
+      `WITH totals AS (
+         SELECT COUNT(*)::int AS total, ROUND(AVG(student_year), 2) AS average_year
+         FROM students
+       ), year_stats AS (
+         SELECT student_year, COUNT(*)::int AS count
+         FROM students
+         GROUP BY student_year
+       )
+       SELECT totals.total, totals.average_year,
          COALESCE(
            json_agg(year_stats ORDER BY year_stats.student_year)
              FILTER (WHERE year_stats.student_year IS NOT NULL),
            '[]'
          ) AS by_year
-       FROM (
-         SELECT student_year, COUNT(*)::int AS count
-         FROM students
-         GROUP BY student_year
-       ) AS year_stats`,
+       FROM totals
+       LEFT JOIN year_stats ON TRUE
+       GROUP BY totals.total, totals.average_year`,
     );
     const stats = result.rows[0];
     return {
@@ -61,6 +65,19 @@ export const studentRepository = {
       [first_name, last_name, student_year, email, phone_number, birth_date],
     );
     return result.rows[0];
+  },
+  updatePartial: async (
+    id: number,
+    input: Partial<StudentDTO>,
+  ): Promise<Student | null> => {
+    const fields = Object.keys(input) as Array<keyof StudentDTO>;
+    const values = fields.map((field) => input[field]);
+    const assignments = fields.map((field, index) => `${field}=$${index + 1}`);
+    const result = await pool.query<Student>(
+      `UPDATE students SET ${assignments.join(", ")} WHERE id = $${values.length + 1} RETURNING *`,
+      [...values, id],
+    );
+    return result.rows[0] || null;
   },
   update: async (id: number, input: StudentDTO): Promise<Student | null> => {
     const {
