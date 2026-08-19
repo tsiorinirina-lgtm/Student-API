@@ -9,11 +9,11 @@ const runMigration = async () => {
       if (file.endsWith(".sql")) {
         const filePath = path.join(migrationsPath, file);
         await pool.query(readFileSync(filePath, "utf-8"));
-        await pool.end();
       }
     }
+    await pool.end();
   } catch (err) {
-    console.log("Error", err);
+    console.log(err);
     process.exit(1);
   }
 };
