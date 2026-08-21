@@ -1,0 +1,613 @@
+.auth-shell {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  background: #f4f0e9;
+}
+.auth-intro {
+  padding: 12vh 9vw;
+  background: #163b36;
+  color: #f8f4eb;
+  position: relative;
+  overflow: hidden;
+}
+.auth-intro::after {
+  content: "S / A";
+  position: absolute;
+  right: -8vw;
+  bottom: -5vw;
+  font:
+    700 22vw/0.8 Georgia,
+    serif;
+  color: rgba(242, 190, 88, 0.12);
+  transform: rotate(-12deg);
+}
+.eyebrow {
+  display: block;
+  color: #c79a4a;
+  font:
+    700 11px/1.2 "Courier New",
+    monospace;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+.auth-intro h1 {
+  max-width: 580px;
+  margin: 28vh 0 22px;
+  color: #f8f4eb;
+  font:
+    400 clamp(44px, 6vw, 84px)/0.95 Georgia,
+    serif;
+  letter-spacing: -3px;
+}
+.auth-intro h1 em {
+  color: #edbd61;
+}
+.auth-intro p {
+  max-width: 390px;
+  color: #b9d0c8;
+  font-size: 17px;
+}
+.signal {
+  position: absolute;
+  bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #b9d0c8;
+  font:
+    12px "Courier New",
+    monospace;
+}
+.signal-dot,
+.api-status i {
+  width: 7px;
+  height: 7px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #8acb9b;
+  box-shadow: 0 0 0 5px rgba(138, 203, 155, 0.12);
+}
+.auth-panel {
+  max-width: 420px;
+  width: calc(100% - 64px);
+  margin: auto;
+  padding: 42px 32px;
+}
+.brand-mark {
+  font:
+    700 22px Georgia,
+    serif;
+  color: #163b36;
+  letter-spacing: -3px;
+}
+.brand-mark span {
+  color: #c79a4a;
+  padding: 0 4px;
+}
+.panel-copy {
+  margin: 100px 0 40px;
+}
+.panel-copy h2 {
+  margin: 15px 0 8px;
+  font:
+    400 38px/1 Georgia,
+    serif;
+  color: #163b36;
+  letter-spacing: -1.5px;
+}
+.panel-copy p {
+  color: #7c776f;
+  font-size: 14px;
+}
+form {
+  display: grid;
+  gap: 19px;
+}
+label {
+  display: grid;
+  gap: 8px;
+  color: #4d5a53;
+  font-size: 12px;
+  font-weight: 700;
+}
+input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d8d0c3;
+  background: transparent;
+  padding: 13px 14px;
+  color: #163b36;
+  font: inherit;
+  outline: 0;
+}
+input:focus {
+  border-color: #c79a4a;
+  box-shadow: 0 0 0 3px rgba(199, 154, 74, 0.12);
+}
+.primary-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0;
+  background: #c79a4a;
+  color: #163b36;
+  padding: 14px 17px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.primary-button:hover {
+  background: #d9ad5b;
+}
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.form-error,
+.notice {
+  color: #a94b3f;
+  font-size: 13px;
+  margin: 0;
+}
+.switch-copy {
+  margin-top: 28px;
+  color: #7c776f;
+  font-size: 13px;
+}
+.text-button,
+.logout {
+  border: 0;
+  background: none;
+  color: #a27733;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 0;
+}
+.dashboard {
+  min-height: 100svh;
+  background: #f4f0e9;
+  color: #69746e;
+}
+.topbar {
+  height: 78px;
+  padding: 0 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd5c9;
+  background: #f9f6f0;
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 27px;
+  font-size: 13px;
+}
+.api-status {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font:
+    12px "Courier New",
+    monospace;
+  color: #557061;
+}
+.user-name {
+  color: #163b36;
+  font-weight: 700;
+}
+.logout {
+  color: #69746e;
+  font-size: 12px;
+}
+.dashboard-content {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 72px 6vw;
+}
+.dashboard-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 45px;
+}
+.dashboard h1 {
+  margin: 14px 0 8px;
+  color: #163b36;
+  font:
+    400 clamp(35px, 5vw, 58px)/1 Georgia,
+    serif;
+  letter-spacing: -2px;
+}
+.dashboard-heading p {
+  font-size: 15px;
+}
+.refresh {
+  border: 1px solid #c9bda9;
+  background: transparent;
+  padding: 11px 15px;
+  color: #557061;
+  cursor: pointer;
+}
+.notice {
+  background: #f8dfd9;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+}
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 58px;
+}
+.stat-grid article {
+  min-height: 150px;
+  box-sizing: border-box;
+  padding: 22px;
+  background: #e6eee7;
+  border-top: 3px solid #c79a4a;
+  display: flex;
+  flex-direction: column;
+}
+.stat-grid article span {
+  font:
+    12px "Courier New",
+    monospace;
+  color: #557061;
+}
+.stat-grid strong {
+  margin: auto 0 6px;
+  font:
+    400 45px Georgia,
+    serif;
+  color: #163b36;
+}
+.stat-grid small {
+  color: #78857e;
+  font-size: 12px;
+}
+.status-value {
+  font-size: 26px !important;
+  color: #3c8b68 !important;
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: 1px solid #cfc6b9;
+  padding-bottom: 16px;
+}
+.section-heading h2 {
+  margin: 9px 0 0;
+  font:
+    400 30px Georgia,
+    serif;
+  color: #163b36;
+}
+.record-count {
+  color: #a27733;
+  font:
+    12px "Courier New",
+    monospace;
+}
+.table-wrap {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+th {
+  padding: 17px 12px;
+  color: #8a8278;
+  font:
+    11px "Courier New",
+    monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+td {
+  padding: 17px 12px;
+  border-top: 1px solid #ddd5c9;
+  white-space: nowrap;
+}
+td:first-child {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #163b36;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: #d4e0d5;
+  color: #3e6e58;
+  font:
+    11px "Courier New",
+    monospace;
+}
+.year-tag {
+  background: #ece3d0;
+  color: #8a672a;
+  padding: 5px 8px;
+  font-size: 11px;
+}
+.empty-state {
+  padding: 46px 0;
+  border-bottom: 1px solid #ddd5c9;
+  color: #8a8278;
+  font-size: 14px;
+}
+@media (max-width: 700px) {
+  .auth-shell {
+    display: block;
+  }
+  .auth-intro {
+    min-height: 260px;
+    padding: 34px 28px;
+    box-sizing: border-box;
+  }
+  .auth-intro h1 {
+    margin: 65px 0 10px;
+    font-size: 48px;
+  }
+  .auth-intro p,
+  .signal {
+    display: none;
+  }
+  .auth-panel {
+    width: auto;
+    padding: 35px 28px 50px;
+  }
+  .panel-copy {
+    margin: 65px 0 34px;
+  }
+  .topbar {
+    padding: 0 24px;
+  }
+  .topbar-right {
+    gap: 14px;
+  }
+  .api-status,
+  .user-name {
+    display: none;
+  }
+  .dashboard-content {
+    padding: 45px 24px;
+  }
+  .dashboard-heading {
+    align-items: start;
+    gap: 20px;
+    flex-direction: column;
+    margin-bottom: 35px;
+  }
+  .stat-grid {
+    grid-template-columns: 1fr;
+    margin-bottom: 45px;
+  }
+  .stat-grid article {
+    min-height: 125px;
+  }
+  .stat-grid strong {
+    margin-top: 18px;
+  }
+  .section-heading h2 {
+    font-size: 26px;
+  }
+}
+
+/* Simple application layout */
+.auth-shell {
+  display: block;
+  min-height: 100svh;
+  padding: 48px 20px;
+  background: #f5f5f5;
+}
+.auth-intro {
+  display: none;
+}
+.auth-panel {
+  width: 100%;
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+.brand-mark {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  color: #222;
+}
+.brand-mark span {
+  color: #666;
+}
+.panel-copy {
+  margin: 32px 0 28px;
+}
+.panel-copy h2,
+.dashboard h1,
+.section-heading h2 {
+  font-family: Arial, sans-serif;
+  letter-spacing: 0;
+  color: #222;
+}
+.panel-copy h2 {
+  margin: 8px 0;
+  font-size: 28px;
+}
+.eyebrow {
+  color: #666;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+.panel-copy p,
+.switch-copy,
+.dashboard,
+.dashboard-heading p {
+  color: #666;
+}
+form {
+  gap: 16px;
+}
+label {
+  color: #333;
+  font-size: 13px;
+}
+input {
+  padding: 10px;
+  border-color: #ccc;
+  background: #fff;
+}
+input:focus {
+  border-color: #777;
+  box-shadow: none;
+}
+.primary-button {
+  justify-content: center;
+  background: #333;
+  color: #fff;
+  padding: 11px 15px;
+}
+.primary-button:hover {
+  background: #111;
+}
+.primary-button span {
+  display: none;
+}
+.text-button,
+.logout {
+  color: #333;
+}
+.dashboard {
+  background: #f5f5f5;
+}
+.topbar {
+  height: 64px;
+  padding: 0 32px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.topbar-right {
+  gap: 20px;
+}
+.api-status {
+  color: #666;
+  font-family: Arial, sans-serif;
+}
+.api-status i {
+  width: 6px;
+  height: 6px;
+  background: #4a9a5b;
+  box-shadow: none;
+}
+.user-name {
+  color: #333;
+}
+.dashboard-content {
+  max-width: 1100px;
+  padding: 48px 32px;
+}
+.dashboard-heading {
+  align-items: center;
+  margin-bottom: 32px;
+}
+.dashboard h1 {
+  margin: 8px 0;
+  font-size: 34px;
+}
+.refresh {
+  padding: 9px 12px;
+  border-color: #ccc;
+  background: #fff;
+  color: #333;
+}
+.stat-grid {
+  gap: 12px;
+  margin-bottom: 42px;
+}
+.stat-grid article {
+  min-height: 120px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+.stat-grid article span,
+.stat-grid small,
+.record-count {
+  color: #777;
+  font-family: Arial, sans-serif;
+}
+.stat-grid strong {
+  margin: auto 0 2px;
+  color: #222;
+  font-family: Arial, sans-serif;
+  font-size: 32px;
+}
+.status-value {
+  color: #333 !important;
+  font-size: 22px !important;
+}
+.section-heading {
+  padding-bottom: 10px;
+  border-bottom-color: #ccc;
+}
+.section-heading h2 {
+  margin-top: 5px;
+  font-size: 24px;
+}
+th {
+  padding: 12px;
+  color: #777;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0;
+}
+td {
+  padding: 12px;
+  border-top-color: #e2e2e2;
+}
+td:first-child {
+  color: #222;
+}
+.avatar {
+  width: 28px;
+  height: 28px;
+  background: #eee;
+  color: #555;
+  font-family: Arial, sans-serif;
+}
+.year-tag {
+  padding: 3px 6px;
+  background: #eee;
+  color: #555;
+}
+.empty-state {
+  padding: 32px 0;
+  border-bottom-color: #ddd;
+}
+@media (max-width: 700px) {
+  .auth-shell {
+    padding: 20px;
+  }
+  .auth-panel {
+    margin: 20px auto;
+  }
+  .topbar {
+    padding: 0 20px;
+  }
+  .dashboard-content {
+    padding: 32px 20px;
+  }
+  .dashboard h1 {
+    font-size: 30px;
+  }
+}
